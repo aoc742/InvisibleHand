@@ -2,6 +2,7 @@
 
 import discord
 import asyncio
+import time
 from message import Message
 from configuration import Configuration
 
@@ -12,7 +13,7 @@ messageHandler = Message(client)
 @client.event
 async def on_ready():
     if config['assert']:
-        print('Logged in as' + client.user.name + ' - ' + client.user.id)
+        print('Logged in as ' + client.user.name + ' - ' + client.user.id)
         print('\nVoice clients:\n' + '\n'.join(str(vcs) for vcs in client.voice_clients))
         print('\nServers:\n' + '\n'.join(str(server) for server in client.servers))
         print('\nAll Channels:\n' + '\n'.join(str(p) for p in client.get_all_channels()))
@@ -43,6 +44,17 @@ async def on_message_delete(message):
 
     fmt = 'Message by {0.author.name} from {0.timestamp} has been deleted. Original message:\n{0.content}'
     await client.send_message(message.channel, fmt.format(message))
+
+@client.event
+async def on_voice_state_update(before, after):
+    if before.voice.voice_channel == None and after.voice.voice_channel != None:
+        for channel in after.server.channels:
+            if channel.type is not str and channel.type != 4 and channel.type.value == 0:
+                if str(after) == 'Gameandwatch#3862':
+                    time.sleep(1)
+                    msg = await client.send_message(channel, "Wassup y'all It's me It's your boy Asmin gold", tts = True)
+                    await client.delete_message(msg)
+                return
 
 async def my_background_task():
     await client.wait_until_ready()

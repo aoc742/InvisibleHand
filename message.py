@@ -5,9 +5,9 @@ class Message():
         self.client = client
 
     async def handle(self, message):
-        msg = await self.client.send_message(message.channel, '{0} said:\n{1}'.format(message.author.name, message.content), tts=True)
-        await self.client.delete_message(msg)
-        return
+        # msg = await self.client.send_message(message.channel, '{0} said:\n{1}'.format(message.author.name, message.content), tts=True)
+        # await self.client.delete_message(msg)
+        # return
 
         if not message.content.startswith('!'):
             return
@@ -23,3 +23,6 @@ class Message():
             msg += 'example: !create tts magnets "Magnets rule!\n'
             msg += 'or: !create tts !magnets Magnets rule!\n'
             msg += 'Type !magnets in chat to test out your new TTS command!\n'
+
+        #if message.content.lower().startswith('!create'):
+            

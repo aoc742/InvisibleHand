@@ -1,0 +1,38 @@
+!create - create a new command
+	!create tts
+	!create [message]
+	!create player
+
+!who - determines who created a specific command
+
+need a list of commands that a user cannot create
+example. Cannot say "!create create 'action'". 
+base commands should be handled first. and possibly even display an error to the user when trying to 
+create one of these reserved command words
+
+* CANNOT DO .startswith for other commands. Need to parse entire and handle just incase
+2 users do not create similar commands. ex. "!Type" & "!TypeThis" could be 2 separate commands
+
+
+json
+
+Users class (python):
+
+"ID": unique discord id
+"Nickname": nickname or profile
+"DateAdded": // this user first used an InvisibleHand command
+"CommandCount": // number of times this user has used an InvisibleHand command
+
+
+{
+    "Banned": ['list', 'of', 'banned', 'command', 'words'],
+    "Users":[
+	"austin81820291": {
+	[ list of commands]
+		{ Name, Type (tts, message, audio), DateCreated, IsActive }
+	}
+
+
+	
+	]
+}
